@@ -10,7 +10,7 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	model = "Radxa ROCK 5C";
+	model = "Radxa ROCK 5C Unlasting";
 	compatible = "radxa,rock-5c", "rockchip,rk3588";
 
 	vcc5v0_sys: vcc5v0-sys {
@@ -106,52 +106,52 @@
 };
 
 &usb_host0_ehci {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &usb_host0_ohci {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &usb2phy2_grf {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &u2phy2 {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &u2phy2_host {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &usb_host1_ehci {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &usb_host1_ohci {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &usb2phy3_grf {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &u2phy3 {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
 &u2phy3_host {
-	status = "okay";
+	status = "disabled";
 	u-boot,dm-pre-reloc;
 };
 
