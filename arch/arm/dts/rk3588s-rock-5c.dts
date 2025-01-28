@@ -97,9 +97,10 @@
 	status = "okay";
 	u-boot,dm-pre-reloc;
 };
-
+/* pcie fpc, sora1874 close it for a quick start-up */
 &pcie2x1l2 {
-	status = "okay";
+	//status = "okay";
+	status = "disabled";
 	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
 	u-boot,dm-pre-reloc;
 	vpcie3v3-supply = <&vcc3v3_pcie>;

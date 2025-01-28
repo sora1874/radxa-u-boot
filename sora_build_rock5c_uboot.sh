@@ -5,9 +5,11 @@ DEF_DTS=rk3588s-rock-5c.dts
 SOC_TYPE=3588
 WORKDIR=$(cd $(dirname $0); pwd)
 
-RKBIN_DIR=/home/sora/sora_samba/05_radxa/rkbin
-RK_ELF=$RKBIN_DIR/bin/rk35/rk3588_bl31_v1.45.elf
-DDR_BIN=$RKBIN_DIR/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin
+#RKBIN_DIR=/home/sora/sora_samba/05_radxa/rkbin
+RKBIN_DIR=/nvme/04_rkbin/
+RK_ELF=$RKBIN_DIR/bin/rk35/rk3588_bl31_v1.47.elf
+#RK_ELF=$RKBIN_DIR/bin/rk35/rk3588_bl31_v1.45.elf
+DDR_BIN=$RKBIN_DIR/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin
 RK_MKIMAGE=$WORKDIR/tools/mkimage
 
 echo "========================================="
@@ -18,9 +20,11 @@ echo "SOC = $SOC_TYPE"
 echo "uboot config = $DEF_CONFIG"
 echo "uboot dts = $DEF_DTS"
 echo "========================================="
-export PATH=$PATH:/home/sora/sora_samba/05_radxa/tools/bin
-export ARCH=arm64
-export CROSS_COMPILE=aarch64-linux-gnu-
+
+## This export is PC build
+#export PATH=$PATH:/home/sora/sora_samba/05_radxa/tools/bin
+#export ARCH=arm64
+#export CROSS_COMPILE=aarch64-linux-gnu-
 
 
 make clean
@@ -33,7 +37,8 @@ make distclean
 # make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
 
 make CROSS_COMPILE=aarch64-linux-gnu- ${DEF_CONFIG}
-make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
+#make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
+make CROSS_COMPILE=aarch64-linux-gnu- -j8 all
 
 #make ${DEF_CONFIG}
 #make --jobs="$(nproc)" all
