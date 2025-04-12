@@ -1,0 +1,48 @@
+#!/bin/sh
+echo "will start build uboot for rock3c"
+DEF_CONFIG=rock-3c-rk3566_defconfig
+DEF_DTS=rk3566-rock-3c.dts
+SOC_TYPE=3566
+WORKDIR=$(cd $(dirname $0); pwd)
+
+#RKBIN_DIR=/home/sora/sora_samba/05_radxa/rkbin
+RKBIN_DIR=/nvme/04_rkbin/
+RK_ELF=$RKBIN_DIR/bin/rk35/rk3568_bl31_v1.44.elf
+#RK_ELF=$RKBIN_DIR/bin/rk35/rk3588_bl31_v1.45.elf
+DDR_BIN=$RKBIN_DIR/bin/rk35/rk3566_ddr_1056MHz_v1.23.bin
+RK_MKIMAGE=$WORKDIR/tools/mkimage
+
+echo "========================================="
+echo "elf = $RK_ELF"
+echo "ddr = $DDR_BIN"
+echo "mkimage = $RK_MKIMAGE"
+echo "SOC = $SOC_TYPE"
+echo "uboot config = $DEF_CONFIG"
+echo "uboot dts = $DEF_DTS"
+echo "========================================="
+
+## This export is PC build
+#export PATH=$PATH:/home/sora/sora_samba/05_radxa/tools/bin
+#export ARCH=arm64
+#export CROSS_COMPILE=aarch64-linux-gnu-
+
+
+make clean
+make distclean
+
+#export BL31=./sora_add_github_bin/rk3568_bl31_v1.43.elf
+#export ROCKCHIP_TPL=./sora_add_github_bin/rk3568_ddr_1560MHz_v1.18.bin
+#make ${DEF_CONFIG}
+# make CROSS_COMPILE=aarch64-linux-gnu- ${DEF_CONFIG}
+# make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
+
+make CROSS_COMPILE=aarch64-linux-gnu- ${DEF_CONFIG}
+#make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
+make CROSS_COMPILE=aarch64-linux-gnu- -j8 all
+
+#make ${DEF_CONFIG}
+#make --jobs="$(nproc)" all
+
+make BL31=$RK_ELF spl/u-boot-spl.bin u-boot.dtb u-boot.itb -j8
+# $RK_MKIMAGE -n rk3588 -T rksd -d $DDR_BIN:spl/u-boot-spl.bin idbloader.img
+$RK_MKIMAGE -n rk3568 -T rksd -d $DDR_BIN:spl/u-boot-spl.bin idbloader.img

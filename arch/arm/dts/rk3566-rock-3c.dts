@@ -161,13 +161,13 @@
 	phy-handle = <&rgmii_phy1>;
 	status = "okay";
 };
-
+/** user disabled for boot speed */
 &pcie2x1 {
 	u-boot,dm-pre-reloc;
 	reset-gpios = <&gpio1 RK_PB2 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&pcie20_3v3>;
 	pinctrl-0 = <&pcie20m2_pins>;
-	status = "okay";
+	status = "disabled";
 };
 
 &combphy2_psq {
@@ -498,41 +498,66 @@
 	};
 };
 
+/** user disabled for boot speed */
+//=================//
+&usbdrd_dwc3 {
+	status = "disabled";
+};
+
+&usbhost_dwc3 {
+	status = "disabled";
+};
+
+&usbdrd30 {
+	status = "disabled";
+};
+
+&usbhost30 {
+	status = "disabled";
+};
+&u2phy0_otg {
+	status = "disabled";
+};
+
+&u2phy0_host {
+	status = "disabled";
+};
+//=================//
 &u2phy1_host {
 	u-boot,dm-pre-reloc;
 	phy-supply = <&vcc5v0_host>;
-	status = "okay";
+	status = "disabled";
 };
 
 &u2phy1_otg {
 	u-boot,dm-pre-reloc;
 	phy-supply = <&vcc5v0_host>;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb2phy1 {
 	u-boot,dm-pre-reloc;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb_host0_ehci {
 	u-boot,dm-pre-reloc;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb_host0_ohci {
 	u-boot,dm-pre-reloc;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb_host1_ehci {
 	u-boot,dm-pre-reloc;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb_host1_ohci {
 	u-boot,dm-pre-reloc;
-	status = "okay";
+	status = "disabled";
 };
 
 &usb2phy1_grf {
