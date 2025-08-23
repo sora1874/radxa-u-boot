@@ -37,8 +37,8 @@ make distclean
 # make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
 
 make CROSS_COMPILE=aarch64-linux-gnu- ${DEF_CONFIG}
-#make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
-make CROSS_COMPILE=aarch64-linux-gnu- -j8 all
+make CROSS_COMPILE=aarch64-linux-gnu- --jobs="$(nproc)" all
+#make CROSS_COMPILE=aarch64-linux-gnu- -j8 all
 
 #make ${DEF_CONFIG}
 #make --jobs="$(nproc)" all

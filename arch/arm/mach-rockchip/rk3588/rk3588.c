@@ -1237,6 +1237,7 @@ static void rk3582_fdt_rm_cpus(const void *blob, u8 cpu_mask)
 
 static void rk3582_fdt_rm_gpu(void *blob, u8 mask)
 {
+#if 0
 	/* If one core is bad, disable gpu */
 	if ((BAD_GPU(mask, 0)) || (BAD_GPU(mask, 1)) || (BAD_GPU(mask, 2)) || (BAD_GPU(mask, 3)))
 	{
@@ -1244,6 +1245,7 @@ static void rk3582_fdt_rm_gpu(void *blob, u8 mask)
 		fdt_rm_path(blob, "/thermal-zones/soc-thermal/cooling-maps/map3");
 		debug("rm: gpu\n");
 	}
+#endif
 }
 
 static void rk3582_fdt_rm_rkvdec01(void *blob, u8 mask)
